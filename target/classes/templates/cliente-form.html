@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Cliente</title>
+</head>
+<body>
+    <h1>Cadastro de Cliente</h1>
+    
+    <p><a href="/clientes">Voltar para Lista</a></p>
+    
+    <form action="/clientes/salvar" method="post" th:object="${cliente}">
+        <input type="hidden" th:field="*{id}">
+        
+        <p>
+            <label>Nome:</label><br>
+            <input type="text" th:field="*{nome}" required size="50">
+        </p>
+        
+        <p>
+            <label>Documento (CPF/CNPJ):</label><br>
+            <input type="text" th:field="*{documento}" required size="30">
+        </p>
+        
+        <p>
+            <label>Telefone:</label><br>
+            <input type="text" th:field="*{telefone}" required size="20">
+        </p>
+        
+        <p>
+            <label>Email:</label><br>
+            <input type="email" th:field="*{email}" required size="40">
+        </p>
+        
+        <p>
+            <button type="submit">Salvar</button>
+            <a href="/clientes"><button type="button">Cancelar</button></a>
+        </p>
+    </form>
+</body>
+</html>

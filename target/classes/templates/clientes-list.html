@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+</head>
+<body>
+    <h1>Gerenciamento de Clientes</h1>
+    
+    <p><a href="/">Página Inicial</a></p>
+    
+    <h2>Buscar Cliente</h2>
+    <form action="/clientes/buscar" method="get">
+        <label>Buscar por:</label>
+        <select name="tipo">
+            <option value="nome">Nome</option>
+            <option value="documento">Documento</option>
+        </select>
+        <input type="text" name="valor" placeholder="Digite o valor...">
+        <button type="submit">Buscar</button>
+        <a href="/clientes">Limpar Busca</a>
+    </form>
+    
+    <hr>
+    
+    <p><a href="/clientes/novo">Cadastrar Novo Cliente</a></p>
+    
+    <h2>Lista de Clientes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Documento</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${clientes}">
+                <td th:text="${c.id}"></td>
+                <td th:text="${c.nome}"></td>
+                <td th:text="${c.documento}"></td>
+                <td th:text="${c.telefone}"></td>
+                <td th:text="${c.email}"></td>
+                <td>
+                    <a th:href="@{'/clientes/editar/' + ${c.id}}">Editar</a> |
+                    <a th:href="@{'/clientes/excluir/' + ${c.id}}" 
+                       onclick="return confirm('Deseja realmente excluir?')">Excluir</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(clientes)}">
+                <td colspan="6">Nenhum cliente cadastrado.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

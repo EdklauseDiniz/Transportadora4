@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Motorista</title>
+</head>
+<body>
+    <h1>Cadastro de Motorista</h1>
+    
+    <p><a href="/motoristas">Voltar para Lista</a></p>
+    
+    <form action="/motoristas/salvar" method="post" th:object="${motorista}">
+        <input type="hidden" th:field="*{id}">
+        
+        <p>
+            <label>Nome:</label><br>
+            <input type="text" th:field="*{nome}" required size="50">
+        </p>
+        
+        <p>
+            <label>CNH (Carteira Nacional de Habilitação):</label><br>
+            <input type="text" th:field="*{cnh}" required size="30">
+        </p>
+        
+        <p>
+            <label>CPF:</label><br>
+            <input type="text" th:field="*{cpf}" required size="20">
+        </p>
+        
+        <p>
+            <label>Telefone:</label><br>
+            <input type="text" th:field="*{telefone}" required size="20">
+        </p>
+        
+        <p>
+            <button type="submit">Salvar</button>
+            <a href="/motoristas"><button type="button">Cancelar</button></a>
+        </p>
+    </form>
+</body>
+</html>

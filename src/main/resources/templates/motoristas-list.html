@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Motoristas</title>
+</head>
+<body>
+    <h1>Gerenciamento de Motoristas</h1>
+    
+    <p><a href="/">Página Inicial</a></p>
+    
+    <h2>Buscar Motorista</h2>
+    <form action="/motoristas/buscar" method="get">
+        <label>Buscar por:</label>
+        <select name="tipo">
+            <option value="nome">Nome</option>
+            <option value="cnh">CNH</option>
+        </select>
+        <input type="text" name="valor" placeholder="Digite o valor...">
+        <button type="submit">Buscar</button>
+        <a href="/motoristas">Limpar Busca</a>
+    </form>
+    
+    <hr>
+    
+    <p><a href="/motoristas/novo">Cadastrar Novo Motorista</a></p>
+    
+    <h2>Lista de Motoristas</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CNH</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="m : ${motoristas}">
+                <td th:text="${m.id}"></td>
+                <td th:text="${m.nome}"></td>
+                <td th:text="${m.cnh}"></td>
+                <td th:text="${m.cpf}"></td>
+                <td th:text="${m.telefone}"></td>
+                <td>
+                    <a th:href="@{'/motoristas/editar/' + ${m.id}}">Editar</a> |
+                    <a th:href="@{'/motoristas/excluir/' + ${m.id}}" 
+                       onclick="return confirm('Deseja realmente excluir?')">Excluir</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(motoristas)}">
+                <td colspan="6">Nenhum motorista cadastrado.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
